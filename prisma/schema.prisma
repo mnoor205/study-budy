@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Answer {
+  id           String   @id @default(uuid()) // Unique identifier for each answer
+  answerText   String   // Text for the answer
+  isCorrect    Boolean  // Whether this answer is correct
+  answerId     String   // Position within the question (1 to 4)
+  questionId   String   // Foreign key referencing Question
+  Question     Question @relation(fields: [questionId], references: [id])
+}
+
+model Question {
+  id            String    @id @default(uuid()) // Unique identifier for each question
+  questionText  String    // Text for the question
+  quizId        String    // Foreign key referencing Quiz
+  Quiz          Quiz      @relation(fields: [quizId], references: [id])
+  answers       Answer[]  // List of possible answers for this question
+}
+
+model Quiz {
+  id          String     @id @default(uuid()) // Unique identifier for each quiz
+  name        String     // Name of the quiz
+  description String     // Description of the quiz
+  questions   Question[] // List of questions in this quiz
+}

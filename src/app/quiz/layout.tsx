@@ -1,9 +1,12 @@
-export default function Layout({ children }: {
-    children: React.ReactNode
-}) {
+import Sidebar from "@/components/sidebar";
+
+export default function Layout({ children }: { children: React.ReactNode }) {
     return (
-        <div className="flex flex-col flex-1 max-w-96 w-full m-auto h-screen gap-6">
-            {children}
+        <div className="flex h-screen">
+            <Sidebar /> {/* Render the Sidebar here */}
+            <main className="flex-1 p-6">
+                {children}
+            </main>
         </div>
-    )
+    );
 }

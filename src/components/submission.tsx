@@ -14,10 +14,6 @@ const QuizSubmission = ({ scorePercentage, score, totalQuestions }: Props) => {
                 <h2 className="text-3xl font-bold">Quiz Finished</h2>
                 <p>You scored: {scorePercentage}</p>
                 <>
-                <div className="flex flex-row gap-8 mt-6">
-                    <VerticalBar percentage={scorePercentage} color="green"/>
-                    <VerticalBar percentage={100 - scorePercentage} color="red"/>
-                </div>
                 <div className="flex flex-row gap-8">
                     <p>{score} Correct</p>
                     <p>{totalQuestions - score} Incorrect </p>
